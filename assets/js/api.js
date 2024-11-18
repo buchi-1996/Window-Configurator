@@ -38,52 +38,49 @@ export const houseFronts = [
 
 
 
-export const glasses = [
+export const glazing = [
     {
         id: 0,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee837a1b3368accc5a5aa.png'
+        title: 'glazing name',
+        image: 'assets/images/glass/glazing/glass-3_r2qg.jpg'
     },
     {
         id: 1,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee837a1b3368accc5a5b6.png'
+        title: 'glazing name',
+        image: 'assets/images/glass/glazing/glass-3.jpg'
     },
     {
         id: 2,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee837a1b3368accc5a5ba.png'
+        title: 'glazing name',
+        image: 'assets/images/glass/glazing/glass-6-5-6.jpg'
     },
     {
         id: 3,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee837a1b3368accc5a5be.png'
+        title: 'glazing name',
+        image: 'assets/images/glass/glazing/glass-10-5-10.jpg'
     },
     {
         id: 4,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee837a1b3368accc5a596.png'
-    },
-    {
-        id: 5,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee838a1b3368accc5a5d6.png'
-    },
-    {
-        id: 6,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee838a1b3368accc5a5ee.png'
-    },
-    {
-        id: 7,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee838a1b3368accc5a5fa.png'
-    },
-    {
-        id: 8,
-        title: 'glass name',
-        image: 'assets/images/glasses/513ee838a1b3368accc5a61a.png'
+        title: 'glazing name',
+        image: 'assets/images/glass/glazing/glass-und-4510-und-455-und-4510.jpg'
     }
+    
+]
+
+
+export const glassTypes = [
+    {
+        id: 0,
+        title: 'Santino',
+        image: 'assets/images/glass/glass-types/513ee837a1b3368accc5a5ba.png'
+    },
+    {
+        id: 1,
+        title: 'Chinchila',
+        image: 'assets/images/glass/glass-types/513ee837a1b3368accc5a5ba.png'
+    },
+
+    
 ]
 
 
@@ -113,28 +110,28 @@ export const windowFrames = [
 export const ramTypes = [
     {
         id: 0,
+        image: 'assets/images/rams/1f_fix_20111028_xgh45.png',
+        
+    },
+    {
+        id: 1,
         image: '/assets/images/rams/1f_dkl_20120220_hqbsh.png',
         
 
     },
     {
-        id: 1,
+        id: 2,
         image: 'assets/images/rams/1f_dkr_20120220_xa3f3.png',
         
     },
     {
-        id: 2,
+        id: 3,
         image: 'assets/images/rams/1f_dl_20101202_skr77.png',
         
     },
     {
-        id: 3,
-        image: 'assets/images/rams/1f_dr_20100818_edv3v.png',
-        
-    },
-    {
         id: 4,
-        image: 'assets/images/rams/1f_fix_20111028_xgh45.png',
+        image: 'assets/images/rams/1f_dr_20100818_edv3v.png',
         
     },
     {

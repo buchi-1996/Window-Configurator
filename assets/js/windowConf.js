@@ -1,4 +1,4 @@
-import { colors, handles, profiles, ramTypes, windowFrames } from "./api.js"
+import { colors, glassTypes, glazing, handles, profiles, ramTypes, windowFrames } from "./api.js"
 
 // Here we define all variables
 let currentMenuItem = 0
@@ -7,6 +7,7 @@ let basicForm = 'single'
 let currentSelectedForm = 0
 let currentSelectedProfile = 0
 let currentColorTab = 0
+let currentSelectedHanlde = 0
 let selectedColor = {
     window: 0,
     frame: 0
@@ -26,27 +27,27 @@ const isOverlightAccordionOpen = false
 const isUnderlightAccordionOpen = false
 
 let ramsTypesForEachSingleFrame = {
-    frame1Ram: 1,
-    frame2Ram: 1,
-    frame3Ram: 1,
-    frame4Ram: 1,
-    frame5Ram: 1,
+    frame1Ram: 0,
+    frame2Ram: 0,
+    frame3Ram: 0,
+    frame4Ram: 0,
+    frame5Ram: 0,
 }
 
 let ramsTypesForEachOverlightFrame = {
-    frame1Ram: 1,
-    frame2Ram: 1,
-    frame3Ram: 1,
-    frame4Ram: 1,
-    frame5Ram: 1,
+    frame1Ram: 0,
+    frame2Ram: 0,
+    frame3Ram: 0,
+    frame4Ram: 0,
+    frame5Ram: 0,
 }
 
 let ramsTypesForEachUnderlightFrame = {
-    frame1Ram: 1,
-    frame2Ram: 1,
-    frame3Ram: 1,
-    frame4Ram: 1,
-    frame5Ram: 1,
+    frame1Ram: 0,
+    frame2Ram: 0,
+    frame3Ram: 0,
+    frame4Ram: 0,
+    frame5Ram: 0,
 }
 
 
@@ -100,8 +101,8 @@ const windowItemMenus = [
         title: 'Construction',
         icon: ` <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25V18a2.25 2.25 0 0 0 2.25 2.25h13.5A2.25 2.25 0 0 0 21 18V8.25m-18 0V6a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6ZM7.5 6h.008v.008H7.5V6Zm2.25 0h.008v.008H9.75V6Z" />
-                </svg>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z" />
+                    </svg>
             </span>`,
         content: `<div class="construction">
             <div class="basic-forms">
@@ -303,7 +304,7 @@ const windowItemMenus = [
                 </span>`,
         content: `<ul class="handles">
                         ${handles.map((handle, index) => (
-                            `<li data-id=${index} class='handle'>
+            `<li data-id=${index} class='handle'>
                                             <span class="selected">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -312,7 +313,7 @@ const windowItemMenus = [
                                             <img src="${handle.image}" loading="lazy" decoding="async" alt="${handle.title}">
                                             <small>${handle.title}</small>
                                         </li>`
-                        )).join('')}            
+        )).join('')}            
                 </ul>`
 
     },
@@ -321,23 +322,62 @@ const windowItemMenus = [
         title: 'Glass',
         icon: `<span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
                 </svg>
+
                 </span>`,
-        content: `<p>Glass type, Rods</p>`
+        content: `<ul class="accordion-wrap">
+                    <li class="accordion-content single-rams">
+                    <div class="accordion-content-header handle-accordion-header">
+                        <p>Glass Type</p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </span>
+                    </div>
+
+                  <div class="glass-types">
+                        ${glassTypes.map((glassType, index) => (
+                    `<div class="glass-type" data-id=${index}>
+                            <span class="selected">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>                                  
+                        </span>
+                            <img src=${glassType.image} loading="lazy" decoding="sync" alt="" >
+                        <small>${glassType.title}</small>
+                        </div>`
+                )).join('')}
+                </div>
+            </li>
+            <li class="accordion-content">
+                    <div class="accordion-content-header handle-accordion-header">
+                        <p>Glazing</p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="glazings">
+                        ${glazing.map((glazing, index) => (
+                    `<div class="glazing" data-id=${index}>
+                            <span class="selected">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>                                  
+                        </span>
+                            <img src=${glazing.image} loading="lazy" decoding="sync" alt="" >
+                        <small>${glazing.title}</small>
+                        </div>`
+                )).join('')}
+                </div>
+            </li>
+            </ul>`
     },
     {
         id: 6,
-        title: 'Properties',
-        icon: `<span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                </svg>
-                </span>`,
-        content: `<p>Distribution, Ventilation grille, Direction & rotaton sequence, Insect screen, Crutch, Pre-Drilling(free)</p>`
-    },
-    {
-        id: 7,
         title: 'Done',
         icon: `<span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -779,6 +819,7 @@ const getCurrentToolsBarContent = () => {
     handleUnderlightFrameOpening()
     handleProfileSelection()
     handleColorTabs()
+    handleKeyHandleSelections()
     // showGetQuoteModal()
 }
 
@@ -1536,9 +1577,10 @@ const handleUnderlightFrameOpening = () => {
             ramsDesktop.forEach((ram, index) => {
                 ramsDesktop[ramsTypesForEachUnderlightFrame.frame1Ram].classList.add('active')
                 ram.addEventListener('click', () => {
-                    console.log(ramsDesktop)
                     ramsDesktop.forEach(ram => ram.classList.remove('active'))
+                    ramsMobile.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsMobile[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame1Ram = index
                 })
             })
@@ -1546,7 +1588,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsMobile[ramsTypesForEachUnderlightFrame.frame1Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsMobile.forEach(ram => ram.classList.remove('active'))
+                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsDesktop[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame1Ram = index
                 })
             })
@@ -1562,7 +1606,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsDesktop[ramsTypesForEachUnderlightFrame.frame2Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsDesktop.forEach(ram => ram.classList.remove('active'))
+                    ramsMobile.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsMobile[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame2Ram = index
                 })
             })
@@ -1570,7 +1616,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsMobile[ramsTypesForEachUnderlightFrame.frame2Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsMobile.forEach(ram => ram.classList.remove('active'))
+                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsDesktop[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame2Ram = index
                 })
             })
@@ -1587,7 +1635,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsDesktop[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsDesktop.forEach(ram => ram.classList.remove('active'))
+                    ramsMobile.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsMobile[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame3Ram = index
                 })
             })
@@ -1595,7 +1645,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsMobile[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsMobile.forEach(ram => ram.classList.remove('active'))
+                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsDesktop[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame3Ram = index
                 })
             })
@@ -1612,7 +1664,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsDesktop[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsDesktop.forEach(ram => ram.classList.remove('active'))
+                    ramsMobile.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsMobile[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame3Ram = index
                 })
             })
@@ -1620,7 +1674,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsMobile[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsMobile.forEach(ram => ram.classList.remove('active'))
+                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsDesktop[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame3Ram = index
                 })
             })
@@ -1637,7 +1693,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsDesktop[ramsTypesForEachUnderlightFrame.frame5Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsDesktop.forEach(ram => ram.classList.remove('active'))
+                    ramsMobile.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsMobile[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame5Ram = index
                 })
             })
@@ -1645,7 +1703,9 @@ const handleUnderlightFrameOpening = () => {
                 ramsMobile[ramsTypesForEachUnderlightFrame.frame5Ram].classList.add('active')
                 ram.addEventListener('click', () => {
                     ramsMobile.forEach(ram => ram.classList.remove('active'))
+                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
                     ram.classList.add('active')
+                    ramsDesktop[index].classList.add('active')
                     ramsTypesForEachUnderlightFrame.frame5Ram = index
                 })
             })
@@ -1675,7 +1735,9 @@ const handleProfileSelection = () => {
             profilesDesktop[currentSelectedProfile].classList.add('active')
             profile.addEventListener('click', () => {
                 profilesDesktop.forEach(profile => profile.classList.remove('active'))
+                profilesMobile.forEach(profile => profile.classList.remove('active'))
                 profile.classList.add('active')
+                profilesMobile[index].classList.add('active')
                 currentSelectedProfile = index
             })
         })
@@ -1684,7 +1746,9 @@ const handleProfileSelection = () => {
             profilesMobile[currentSelectedProfile].classList.add('active')
             profile.addEventListener('click', () => {
                 profilesMobile.forEach(profile => profile.classList.remove('active'))
+                profilesDesktop.forEach(profile => profile.classList.remove('active'))
                 profile.classList.add('active')
+                profilesDesktop[index].classList.add('active')
                 currentSelectedProfile = index
             })
         })
@@ -1696,14 +1760,12 @@ const handleColorTabs = () => {
     if (settingsTitle.toLowerCase() === 'colors') {
         const tabButtonsDesktop = document.querySelectorAll('.tools_sidebar-content .color-tab-buttons button');
         const tabButtonsMobile = document.querySelectorAll('.mobile_tools-bar .color-tab-buttons button');
-        
+
         const tabContentsDesktop = document.querySelectorAll('.tools_sidebar-content .color-tab-contents');
         const tabContentsMobile = document.querySelectorAll('.mobile_tools-bar .color-tab-contents');
-    
-        // Load and switch tab contents
-        // Select respective tab colors
 
-        console.log(tabButtonsDesktop, tabContentsDesktop)
+
+
 
         const loadTabContent = (tabIndex) => {
             if (tabButtonsDesktop.length > 0 && tabContentsDesktop.length > 0) {
@@ -1712,7 +1774,7 @@ const handleColorTabs = () => {
 
                     const content = tabButtonsDesktop[tabIndex].innerText.trim().toLowerCase() === 'window' ? (` <ul class="colors window-colors">
                                     ${colors.map((color, index) => (
-                                        `<li class="color" style="background: ${color.code}">
+                        `<li class="color" style="background: ${color.code}">
                                     <span class="selected">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -1720,10 +1782,10 @@ const handleColorTabs = () => {
                                     </span>
                                     <small>${color.Ralcode}</small>
                                 </li>`
-                                    )).join('')}
+                    )).join('')}
                                 </ul>`) : (` <ul class="colors frame-colors">
                                     ${colors.map((color, index) => (
-                                        `<li class="color" style="background: ${color.code}">
+                        `<li class="color" style="background: ${color.code}">
                                     <span class="selected">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -1731,7 +1793,7 @@ const handleColorTabs = () => {
                                     </span>
                                     <small>${color.Ralcode}</small>
                                 </li>`
-                                    )).join('')}
+                    )).join('')}
                                 </ul>`);
 
                     tabContent.innerHTML = `${content}`;
@@ -1742,9 +1804,20 @@ const handleColorTabs = () => {
                 tabContentsMobile.forEach(tabContent => {
                     tabContent.innerHTML = '';
 
-                    const content = tabButtonsMobile[tabIndex].innerText.trim().toLowerCase() === 'color' ? (`
+                    const content = tabButtonsDesktop[tabIndex].innerText.trim().toLowerCase() === 'window' ? (` <ul class="colors window-colors">
+                                    ${colors.map((color, index) => (
+                        `<li class="color" style="background: ${color.code}">
+                                    <span class="selected">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                        </svg>                                  
+                                    </span>
+                                    <small>${color.Ralcode}</small>
+                                </li>`
+                    )).join('')}
+                                </ul>`) : (` <ul class="colors frame-colors">
                         ${colors.map((color, index) => (
-                            `<li class="color" style="background: ${color.code}">
+                        `<li class="color" style="background: ${color.code}">
                         <span class="selected">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -1752,20 +1825,9 @@ const handleColorTabs = () => {
                         </span>
                         <small>${color.Ralcode}</small>
                     </li>`
-                        )).join('')}
-                    </ul>`) : (` <ul class="colors frame-colors">
-                        ${colors.map((color, index) => (
-                            `<li class="color" style="background: ${color.code}">
-                        <span class="selected">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>                                  
-                        </span>
-                        <small>${color.Ralcode}</small>
-                    </li>`
-                        )).join('')}
+                    )).join('')}
                     </ul>`);
-                            
+
 
                     tabContent.innerHTML = `${content}`;
                 });
@@ -1790,8 +1852,8 @@ const handleColorTabs = () => {
                 button.removeEventListener('click', handleMobileClick);
             });
         };
-        
-          
+
+
         const handleDesktopClick = (e) => {
             const button = e.target;
             const index = Array.from(tabButtonsDesktop).indexOf(button);
@@ -1821,50 +1883,124 @@ const handleColorTabs = () => {
 
         const handleWindowColorClick = () => {
 
-            if(currentColorTab === 0){
-                const colorButtons = document.querySelectorAll('.window-colors .color')
-            console.log(colorButtons);
-            if(colorButtons){
-                colorButtons[selectedColor.window].classList.add('active')
+            if (currentColorTab === 0) {
+                const colorButtonsDesktop = document.querySelectorAll('.tools_sidebar .window-colors .color')
+                const colorButtonsMobile = document.querySelectorAll('.mobile_tools-bar .window-colors .color')
+                console.log(colorButtonsDesktop);
+                if (colorButtonsDesktop) {
+                    colorButtonsDesktop[selectedColor.window].classList.add('active')
 
 
-            colorButtons.forEach((color, index) => {
-                color.addEventListener('click', ()=> {
-                colorButtons.forEach(btn => btn.classList.remove('active'))
-                    color.classList.add('active')
-                    selectedColor.window = index
-                    
-                })
-            })
+                    colorButtonsDesktop.forEach((color, index) => {
+                        color.addEventListener('click', () => {
+                            colorButtonsDesktop.forEach(btn => btn.classList.remove('active'))
+                            colorButtonsMobile.forEach(btn => btn.classList.remove('active'))
+                            color.classList.add('active')
+                            colorButtonsMobile[index].classList.add('active')
+                            selectedColor.window = index
+
+                        })
+                    })
+                }
+
+                if (colorButtonsMobile) {
+                    colorButtonsMobile[selectedColor.window].classList.add('active')
+
+
+                    colorButtonsMobile.forEach((color, index) => {
+                        color.addEventListener('click', () => {
+                            colorButtonsMobile.forEach(btn => btn.classList.remove('active'))
+                            colorButtonsDesktop.forEach(btn => btn.classList.remove('active'))
+                            color.classList.add('active')
+                            colorButtonsDesktop[index].classList.add('active')
+                            selectedColor.window = index
+
+                        })
+                    })
+                }
             }
-            }
-               
+
         }
 
         const handleFrameColorClick = () => {
 
-            if(currentColorTab === 1){
-                const colorButtons = document.querySelectorAll('.frame-colors .color')
-            console.log(colorButtons);
-            colorButtons[selectedColor.frame].classList.add('active')
+            if (currentColorTab === 1) {
+                const colorButtonsDesktop = document.querySelectorAll('.tools_sidebar .frame-colors .color')
+                const colorButtonsMobile = document.querySelectorAll('.mobile_tools-bar .frame-colors .color')
+                console.log(colorButtonsDesktop);
+
+                if (colorButtonsDesktop) {
+                    colorButtonsDesktop[selectedColor.frame].classList.add('active')
 
 
-            colorButtons.forEach((color, index) => {
-                color.addEventListener('click', ()=> {
-                colorButtons.forEach(btn => btn.classList.remove('active'))
-                    color.classList.add('active')
-                    selectedColor.frame = index
-                    
-                })
-            })
+                    colorButtonsDesktop.forEach((color, index) => {
+                        color.addEventListener('click', () => {
+                            colorButtonsDesktop.forEach(btn => btn.classList.remove('active'))
+                            colorButtonsMobile.forEach(btn => btn.classList.remove('active'))
+                            color.classList.add('active')
+                            colorButtonsMobile[index].classList.add('active')
+                            selectedColor.frame = index
+
+                        })
+                    })
+                }
+
+                if (colorButtonsMobile) {
+                    colorButtonsMobile[selectedColor.frame].classList.add('active')
+
+
+                    colorButtonsMobile.forEach((color, index) => {
+                        color.addEventListener('click', () => {
+                            colorButtonsMobile.forEach(btn => btn.classList.remove('active'))
+                            colorButtonsDesktop.forEach(btn => btn.classList.remove('active'))
+                            color.classList.add('active')
+                            colorButtonsDesktop[index].classList.add('active')
+                            selectedColor.frame = index
+
+                        })
+                    })
+                }
             }
-               
+
         }
-        
+
 
 
         loadTabContent(currentColorTab)
         handleWindowColorClick()
         handleFrameColorClick()
+    }
+}
+
+
+const handleKeyHandleSelections = () => {
+    if(settingsTitle.toLowerCase() === 'handles'){
+
+            const handleButtonsDesktop = document.querySelectorAll('.tools_sidebar .handles .handle')
+            const handleButtonsMobile = document.querySelectorAll('.mobile_tools-bar .handles .handle')
+
+            handleButtonsDesktop.forEach((handle, index) => {
+                handleButtonsDesktop[currentSelectedHanlde].classList.add('active')
+                handle.addEventListener('click', () => {
+                    handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
+                    handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
+                    handle.classList.add('active')
+                    handleButtonsMobile[index].classList.add('active')
+                    currentSelectedHanlde = index
+                })
+            })
+
+
+            handleButtonsMobile.forEach((handle, index) => {
+                handleButtonsMobile[currentSelectedHanlde].classList.add('active')
+                handle.addEventListener('click', () => {
+                    handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
+                    handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
+                    handle.classList.add('active')
+                    handleButtonsDesktop[index].classList.add('active')
+                    currentSelectedHanlde = index
+                })
+            })
+
     }
 }

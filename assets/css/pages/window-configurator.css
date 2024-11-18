@@ -159,12 +159,66 @@
 
 .helper_buttons button{
     background: transparent;
+    position: relative;
 }
 
 .helper_buttons .swap_view-btn{
     width: 26px;
     object-fit: contain;
 }
+
+.conf_header .helper_buttons button .tool-tip{
+    color: var(--main-white);
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    width: max-content;
+    background: var(--main-black);
+    background-image: radial-gradient(80.5% 100% at 50% 0%, rgba(11, 36, 71, 0.159) 0%, /* Lightened and transparent version of #0b2447 */ rgba(4, 6, 21, 0) 100%), /* Transparent towards the bottom */ linear-gradient(to bottom, rgba(11, 36, 71, 0.9), /* Upper gradient color now #0b2447 with slight opacity */ rgba(4, 6, 21, 0.8), /* Main black with more opacity */ rgba(68, 68, 68, 0.7) /* Ash grey with even more opacity */);
+    border: 1px solid #eeeeee27;
+    padding: 5px 10px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 20px;
+    transition: all .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.conf_header .helper_buttons button:hover .tool-tip{
+    margin-top: 13px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.img-fluid .helper_buttons button .tool-tip{
+    color: var(--main-white);
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 12px;
+    width: max-content;
+    background: var(--main-black);
+    background-image: radial-gradient(80.5% 100% at 50% 0%, rgba(11, 36, 71, 0.159) 0%, /* Lightened and transparent version of #0b2447 */ rgba(4, 6, 21, 0) 100%), /* Transparent towards the bottom */ linear-gradient(to bottom, rgba(11, 36, 71, 0.9), /* Upper gradient color now #0b2447 with slight opacity */ rgba(4, 6, 21, 0.8), /* Main black with more opacity */ rgba(68, 68, 68, 0.7) /* Ash grey with even more opacity */);
+    border: 1px solid #eeeeee27;
+    padding: 5px 10px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 10px;
+    transition: all .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.img-fluid .helper_buttons button:hover .tool-tip{
+    margin-top: 0px;
+    opacity: 1;
+    visibility: visible;
+}
+
+
 
 .helper_buttons-mobile .swap_view-btn{
     width: 20px;
@@ -996,6 +1050,81 @@
     transform: rotate(90deg)
 }
 
+/* Glass Types */
+.glass-types{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.glass-type{
+    position: relative;
+    display: grid;
+    background: #ffffff0d;
+    border: 1px solid #eeeeee27;
+    border-radius: 10px;
+    padding: 10px;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all .5s ease;
+    width: 100%;
+}
+
+.glass-types .glass-type .selected{
+    display: none; 
+}
+
+.glass-types .glass-type.active .selected{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-type img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Glazing */
+.glazings{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.glazing{
+    position: relative;
+    display: grid;
+    background: #ffffff0d;
+    border: 1px solid #eeeeee27;
+    border-radius: 10px;
+    padding: 10px;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all .5s ease;
+    width: 100%;
+}
+
+.glazings .glazing .selected{
+    display: none; 
+}
+
+.glazings .glazing.active .selected{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glazing img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
 
 
 
@@ -1171,6 +1300,30 @@
     bottom: 10px;
     right: 14px;
     padding: 5px 8px;
+}
+
+.add-to-cart .tool-tip{
+    color: var(--main-white);
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 45px;
+    font-size: 12px;
+    width: max-content;
+    background: var(--main-black);
+    background-image: radial-gradient(80.5% 100% at 50% 0%, rgba(11, 36, 71, 0.159) 0%, /* Lightened and transparent version of #0b2447 */ rgba(4, 6, 21, 0) 100%), /* Transparent towards the bottom */ linear-gradient(to bottom, rgba(11, 36, 71, 0.9), /* Upper gradient color now #0b2447 with slight opacity */ rgba(4, 6, 21, 0.8), /* Main black with more opacity */ rgba(68, 68, 68, 0.7) /* Ash grey with even more opacity */);
+    border: 1px solid #eeeeee27;
+    padding: 5px 10px;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 20px;
+    pointer-events: none;
+    transition: all .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.add-to-cart:hover .tool-tip{
+    margin-top: 13px;
+    opacity: 1;
+    visibility: visible;
 }
 
 .add-to-cart svg{
