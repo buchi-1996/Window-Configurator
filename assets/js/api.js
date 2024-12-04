@@ -86,27 +86,325 @@ export const glassTypes = [
 
 // Window Api Data
 export const windowFrames = [
-    {
-        id: 0,
-        title: 'Single',
-        image: '/assets/images/window-frames/single-frame.png',
-        
-
-    },
+    
     {
         id: 1,
-        title: 'Overlight',
-        image: '/assets/images/window-frames/single-with-overhead.png',
+        title: 'frame 1',
+        image: 'assets/images/window-frames/1.png',
         
     },
     {
         id: 2,
-        title: 'Underlight',
-        image: '/assets/images/window-frames/with-underlitch.png',
+        title: 'frame 2',
+        image: 'assets/images/window-frames/2.png',
+        
+    },
+    {
+        id: 3,
+        title: 'frame 3',
+        image: 'assets/images/window-frames/3.png',
+        
+    },
+    {
+        id: 4,
+        title: 'frame 4',
+        image: 'assets/images/window-frames/4.png',
+        
+    },
+    {
+        id: 5,
+        title: 'frame 5',
+        image: 'assets/images/window-frames/5.png',
+        
+    },
+    {
+        id: 6,
+        title: 'frame 6',
+        image: 'assets/images/window-frames/6.png',
+        
+    },
+    {
+        id: 7,
+        title: 'frame 7',
+        image: 'assets/images/window-frames/7.png',
+        
+    },
+    {
+        id: 8,
+        title: 'frame 8',
+        image: 'assets/images/window-frames/8.png',
+        
+    },
+    {
+        id: 9,
+        title: 'frame 9',
+        image: 'assets/images/window-frames/9.png',
+        
+    },
+    {
+        id: 10,
+        title: 'frame 10',
+        image: 'assets/images/window-frames/10.png',
+        
+    },
+    {
+        id: 11,
+        title: 'frame 11',
+        image: 'assets/images/window-frames/11.png',
+        
+    },
+    {
+        id: 12,
+        title: 'frame 12',
+        image: 'assets/images/window-frames/12.png',
+        
+    },
+    {
+        id: 13,
+        title: 'frame 13',
+        image: 'assets/images/window-frames/13.png',
+        
+    },
+    {
+        id: 14,
+        title: 'frame 14',
+        image: 'assets/images/window-frames/14.png',
+        
+    },
+    {
+        id: 15,
+        title: 'frame 15',
+        image: 'assets/images/window-frames/15.png',
+        
+    },
+    {
+        id: 16,
+        title: 'frame 16',
+        image: 'assets/images/window-frames/16.png',
+        
+    },
+    {
+        id: 17,
+        title: 'frame 17',
+        image: 'assets/images/window-frames/17.png',
+        
+    },
+    {
+        id: 18,
+        title: 'frame 18',
+        image: 'assets/images/window-frames/18.png',
+        
+    },
+    {
+        id: 19,
+        title: 'frame 19',
+        image: 'assets/images/window-frames/19.png',
+        
+    },
+    {
+        id: 20,
+        title: 'frame 20',
+        image: 'assets/images/window-frames/20.png',
+        
+    },
+    {
+        id: 21,
+        title: 'frame 21',
+        image: 'assets/images/window-frames/21.png',
+        
+    },
+    {
+        id: 22,
+        title: 'frame 22',
+        image: 'assets/images/window-frames/22.png',
+        
+    },
+    {
+        id: 23,
+        title: 'frame 23',
+        image: 'assets/images/window-frames/23.png',
+        
+    },
+    {
+        id: 24,
+        title: 'frame 24',
+        image: 'assets/images/window-frames/24.png',
+        
+    },
+    {
+        id: 25,
+        title: 'frame 25',
+        image: 'assets/images/window-frames/25.png',
+        
+    },
+    {
+        id: 26,
+        title: 'frame 26',
+        image: 'assets/images/window-frames/26.png',
         
     },
     
 ]
+// export const windowFrames = [
+//     {
+//         id: 0,
+//         title: 'Fixed - Fixed - Fixed - frame',
+//         image: 'assets/images/window-frames/Fixed-Fixed-Fixed-frame.webp',
+        
+
+//     },
+//     {
+//         id: 1,
+//         title: 'Fixed - (with skylight tilt) - fixed - frame',
+//         image: 'assets/images/window-frames/Fixed-with-skylight-tilt-fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 2,
+//         title: 'Fixed - Fixed - frame',
+//         image: 'assets/images/window-frames/Fixed-Fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 3,
+//         title: 'Fixed - turn/tilt - fixed - frame - with - fanlights - (fixed)',
+//         image: 'assets/images/window-frames/Fixed-turn-tilt-fixed-frame-with-fanlights-(fixed).webp',
+        
+//     },
+//     {
+//         id: 4,
+//         title: 'Fixed  turn/tilt  fixed  frame',
+//         image: 'assets/images/window-frames/Fixed-turn-tilt-fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 5,
+//         title: 'Fixed window with fanlight (tilt) frame',
+//         image: 'assets/images/window-frames/Fixed-window-with-fanlight-(tilt).webp',
+        
+//     },
+//     {
+//         id: 6,
+//         title: 'Fixed',
+//         image: 'assets/images/window-frames/fixed.webp',
+        
+//     },
+//     {
+//         id: 7,
+//         title: 'Tilt frame',
+//         image: 'assets/images/window-frames/Tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 8,
+//         title: 'Tilt - tilt frame',
+//         image: 'assets/images/window-frames/Tilt-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 9,
+//         title: 'Turn/tilt (with fixed fanlight) fixed frame',
+//         image: 'assets/images/window-frames/Turn-tilt-with-fixed-fanlight-fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 10,
+//         title: 'Turn/tilt (with tilt fanlight) fixed frame',
+//         image: 'assets/images/window-frames/Turn-tilt-with-tilt-fanlight-fixed.webp',
+        
+//     },
+//     {
+//         id: 11,
+//         title: 'Turn/tilt 1/3 - fixed 2/3 frame',
+//         image: 'assets/images/window-frames/Turn-tilt-1-3-fixed-2-3-frame.webp',
+        
+//     },
+//     {
+//         id: 12,
+//         title: 'Turn/tilt - fixed - fixed frame',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 13,
+//         title: 'Turn/tilt - fixed - fixed - turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-fixed-turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 14,
+//         title: 'Turn/tilt - fixed frame with fanlights (fixed)',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-frame-with-fanlights-(fixed).png',
+        
+//     },
+//     {
+//         id: 15,
+//         title: 'Turn/tilt - fixed frame',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-frame.webp',
+        
+//     },
+//     {
+//         id: 16,
+//         title: 'Turn/tilt - fixed - turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 17,
+//         title: 'Turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 18,
+//         title: 'Turn/tilt - turn casement frame with fanlight frame',
+//         image: 'assets/images/window-frames/Turn-tilt-turn-casement-frame-with-fanlight-(fixed).webp',
+        
+//     },
+//     {
+//         id: 19,
+//         title: 'Turn/tilt - turn mullion frame',
+//         image: 'assets/images/window-frames/Turn-tilt-turn-mullion-frame.webp',
+        
+//     },
+//     {
+//         id: 20,
+//         title: 'Turn/tilt - turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 21,
+//         title: 'Turn/tilt - Turn/tilt - Turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-Turn-tilt-Turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 22,
+//         title: 'Turn/tilt - Turn/tilt - Turn/tilt - Turn/tilt frame',
+//         image: 'assets/images/window-frames/Turn-tilt-turn-tilt-turn-tilt-turn-tilt-frame.webp',
+        
+//     },
+//     {
+//         id: 23,
+//         title: 'Turn/tilt - with fanlight - (fixed) frame',
+//         image: 'assets/images/window-frames/Turn-tilt-with-fanlight-(fixed)-frame.webp',
+        
+//     },
+//     {
+//         id: 24,
+//         title: 'Turn/tilt with parapet (fixed) frame',
+//         image: 'assets/images/window-frames/Turn-tilt-with-parapet-(fixed)-frame.webp',
+        
+//     },
+//     {
+//         id: 25,
+//         title: 'Turn/tilt - fixed - turn/tilt - frame with fanlights - (fixed) frame',
+//         image: 'assets/images/window-frames/Turn-tilt-fixed-turn-tilt-frame-with-fanlights-(fixed).webp',
+        
+//     },
+    
+// ]
 export const ramTypes = [
     {
         id: 0,

@@ -7,11 +7,15 @@ let basicForm = 'single'
 let currentSelectedForm = 0
 let currentSelectedProfile = 0
 let currentColorTab = 0
-let currentSelectedHanlde = 0
+let currentSelectedHandle = 0
+let currentSelectedGlassType = 0
+let currentSelectedGlazing = 0
 let selectedColor = {
     window: 0,
     frame: 0
 }
+
+let currentSelectedWindowFrame = 0
 
 let numOfSingleParts = 1
 let currentSelectedSinglePart = 0
@@ -22,9 +26,6 @@ let currentSelectedOverlightPart = 0
 let numberOfUnderLight = 1
 let currentSelectedUnderlightPart = 0
 
-const isSingleFrameAccordionOpen = false
-const isOverlightAccordionOpen = false
-const isUnderlightAccordionOpen = false
 
 let ramsTypesForEachSingleFrame = {
     frame1Ram: 0,
@@ -98,155 +99,26 @@ const windowItemMenus = [
     },
     {
         id: 1,
-        title: 'Construction',
+        title: 'Window frames',
         icon: ` <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z" />
                     </svg>
             </span>`,
-        content: `<div class="construction">
-            <div class="basic-forms">
-                <h4>Select basic form<h4/>
-                <ul>
-                    ${windowFrames.map(frame => (
-            `<li class="basic-form" data-id=${frame.title}>
+        content: `<div class="windows">
+                <ul class="window-frames">
+                    ${windowFrames.map((frame, index)=> (
+            `<li class="window-frame " data-id=${index}>
                         <span class="selected">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                             </svg>                                  
                         </span>
-                        <img src=${frame.image} loading="lazy" decoding="sync" alt="" >
+                        <img src=${frame.image} loading="lazy" decoding="sync" alt=${frame.title} >
                         <small>${frame.title}</small>
                     </li>`
         )).join('')}
                 </ul>
-            </div>
-            <div class="num-of-parts single">
-                <h4>Select number of parts (Single)<h4/>
-                <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-            </div>
-
-            ${basicForm === 'overlight' ? (
-                `<div class="num-of-parts overlight">
-                <h4>Select number of parts (overlight)<h4/>
-                <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-            </div>`
-            ) : ''}
-
-            ${basicForm === 'underlight' ? (
-                `<div class="num-of-parts underlight">
-                <h4>Select number of parts (underlight)<h4/>
-                <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-            </div>`
-            ) : ''}
-
-            <div class="ram-types">
-                <h4>Opening style<h4/>
-
-                <ul class="accordion-wrap">
-                    <li class="accordion-content single-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Single</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numOfSingleParts }, (_, i) => i + 1).map((part) => (
-                `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                    `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-            )).join('')}
-            </li>
-
-            ${basicForm === 'overlight' ? (
-                `<li class="accordion-content overlight-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Overlight</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numOfOverLight }, (_, i) => i + 1).map((part) => (
-                    `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                        `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                    )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-                )).join('')}
-            </li>`
-            ) : ''}
-
-            ${basicForm === 'underlight' ? (
-                `<li class="accordion-content underlight-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Underlight</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numberOfUnderLight }, (_, i) => i + 1).map((part) => (
-                    `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                        `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                    )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-                )).join('')}
-            </li>`
-            ) : ''}
-            </ul>
-        </div>
-
-                
         </div>`
     },
     {
@@ -326,9 +198,10 @@ const windowItemMenus = [
                 </svg>
 
                 </span>`,
-        content: `<ul class="accordion-wrap">
-                    <li class="accordion-content single-rams">
-                    <div class="accordion-content-header handle-accordion-header">
+        content: `<div class="glass">
+            <ul class="accordion-wrap">
+                    <li class="accordion-content">
+                    <div class="accordion-content-header">
                         <p>Glass Type</p>
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -339,7 +212,7 @@ const windowItemMenus = [
 
                   <div class="glass-types">
                         ${glassTypes.map((glassType, index) => (
-                    `<div class="glass-type" data-id=${index}>
+            `<div class="glass-type" data-id=${index}>
                             <span class="selected">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -348,7 +221,7 @@ const windowItemMenus = [
                             <img src=${glassType.image} loading="lazy" decoding="sync" alt="" >
                         <small>${glassType.title}</small>
                         </div>`
-                )).join('')}
+        )).join('')}
                 </div>
             </li>
             <li class="accordion-content">
@@ -362,7 +235,7 @@ const windowItemMenus = [
                     </div>
                     <div class="glazings">
                         ${glazing.map((glazing, index) => (
-                    `<div class="glazing" data-id=${index}>
+            `<div class="glazing" data-id=${index}>
                             <span class="selected">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -371,10 +244,11 @@ const windowItemMenus = [
                             <img src=${glazing.image} loading="lazy" decoding="sync" alt="" >
                         <small>${glazing.title}</small>
                         </div>`
-                )).join('')}
+        )).join('')}
                 </div>
             </li>
-            </ul>`
+            </ul>
+        </div>`
     },
     {
         id: 6,
@@ -405,125 +279,49 @@ const windowItemMenus = [
                                 <h5 class="section-name">Your configuration</h5>
                                 <div class="section-details">
                                     <div class="row section-detail">
-                                        <p class="col-a">Catalog</p>
-                                        <p class="col-b"> Plastic</p>
+                                        <p class="col-a">Profile</p>
+                                        <p class="col-b">${profiles[currentSelectedProfile].title}</p>
                                     </div>
                                     <div class="row section-detail">
-                                        <p class="col-a">Model</p>
-                                        <p class="col-b">TH 2220</p>
+                                        <p class="col-a">Window type</p>
+                                        <p class="col-b">${windowFrames[currentSelectedWindowFrame].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Handle</p>
+                                        <p class="col-b">${handles[currentSelectedHandle].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Dimension</p>
+                                        <p class="col-b">1000 x 2000</p>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="section-data">
-                                <h5 class="section-name">Construction</h5>
+                                <h5 class="section-name">Colors</h5>
                                 <div class="section-details">
                                     <div class="row section-detail">
-                                        <p class="col-a">Door frame</p>
-                                        <p class="col-b">Leaf door</p>
+                                        <p class="col-a">Window</p>
+                                        <p class="col-b"><span class="color_indicator" style="background: ${colors[selectedColor.window].code}"></span>${colors[selectedColor.window].Ralcode}</p>
                                     </div>
                                     <div class="row section-detail">
-                                        <p class="col-a">Material</p>
-                                        <p class="col-b">Plastic</p>
+                                        <p class="col-a">Frame</p>
+                                        <p class="col-b"><span class="color_indicator" style="background: ${colors[selectedColor.frame].code}"></span>${colors[selectedColor.frame].Ralcode}</p>
                                     </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Overall dimension</p>
-                                        <p class="col-b">1150 x 2220</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door handle position</p>
-                                        <p class="col-b">Left swing</p>
-                                    </div>
+                                    
                                 </div>
+                            </div>
+                            
                             <div class="section-data">
                                 <h5 class="section-name">Glass</h5>
                                 <div class="section-details">
                                     <div class="row section-detail">
-                                        <p class="col-a">Left panel 1</p>
-                                        <p class="col-b">clear glass</p>
+                                        <p class="col-a">Glass type</p>
+                                        <p class="col-b">${glassTypes[currentSelectedGlassType].title}</p>
                                     </div>
                                     <div class="row section-detail">
-                                        <p class="col-a">Right panel</p>
-                                        <p class="col-b">Rough glass</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door glass</p>
-                                        <p class="col-b">Smooth glass</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-data">
-                                <h5 class="section-name">Color & Textures</h5>
-                                <div class="section-details">
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door color</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Frame color</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door Decor</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Frame Decor</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-data">
-                                <h5 class="section-name">Indoor Color & Textures</h5>
-                                <div class="section-details">
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door color</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Frame color</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door Decor</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Frame Decor</p>
-                                        <p class="col-b">Grey</p>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="section-data">
-                                <h5 class="section-name">Handles</h5>
-                                <div class="section-details">
-                                    <div class="row section-detail">
-                                        <p class="col-a">Handle</p>
-                                        <p class="col-b">Handle one</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Inner ducker</p>
-                                        <p class="col-b">4.130.00 Drücker/Langschild Innen (0784-13-I)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-data">
-                                <h5 class="section-name">Options</h5>
-                                <div class="section-details">
-                                    <div class="row section-detail">
-                                        <p class="col-a">Pz-Rosette</p>
-                                        <p class="col-b">type 1</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Locking</p>
-                                        <p class="col-b">Daylatch</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Advanced security</p>
-                                        <p class="col-b">Fl01</p>
-                                    </div>
-                                    <div class="row section-detail">
-                                        <p class="col-a">Door viewers</p>
-                                        <p class="col-b">Digital Door viewer</p>
+                                        <p class="col-a">Glazing</p>
+                                        <p class="col-b">${glazing[currentSelectedGlazing].title}</p>
                                     </div>
                                 </div>
                             </div>
@@ -567,6 +365,8 @@ const loadEventListeners = () => {
         handleGetQuote(doorDoneMenu)
 
     })
+
+    
 }
 
 
@@ -642,7 +442,6 @@ const handleDynamicMenuButtonClick = () => {
             setTimeout(() => {
                 showSettingsModal(settingsTitle, currentMenuItem);
                 showMobileSettingsModal(settingsTitle, currentMenuItem);
-                updateConstructionTab()
                 getCurrentToolsBarContent()
             }, 40);
             // Change active states for desktop responsive screens
@@ -674,7 +473,6 @@ const handleDynamicMenuButtonClick = () => {
 
             showMobileSettingsModal(settingsTitle, currentMenuItem)
             showSettingsModal(settingsTitle, currentMenuItem)
-            updateConstructionTab()
             getCurrentToolsBarContent()
 
 
@@ -764,7 +562,6 @@ const handlePrevClick = () => {
     setTimeout(() => {
         showSettingsModal(settingsTitle, currentMenuItem)
         showMobileSettingsModal(settingsTitle, currentMenuItem)
-        updateConstructionTab()
         getCurrentToolsBarContent()
     }, 40);
 
@@ -792,7 +589,6 @@ const handleNextClick = () => {
     setTimeout(() => {
         showSettingsModal(settingsTitle, currentMenuItem)
         showMobileSettingsModal(settingsTitle, currentMenuItem)
-        updateConstructionTab()
         getCurrentToolsBarContent()
 
     }, 40);
@@ -810,16 +606,12 @@ const handleNextClick = () => {
 
 const getCurrentToolsBarContent = () => {
     toggleAccordion()
-    handleSinglePartSelection()
-    handleOverlightPartSelection()
-    handleUnderlightPartSelection()
-    handleBasicFormSelection()
-    handleSingleFrameOpening()
-    handleOverlightFrameOpening()
-    handleUnderlightFrameOpening()
     handleProfileSelection()
     handleColorTabs()
     handleKeyHandleSelections()
+    handleGlassSelection()
+    handleWindowFrameSelection()
+    handleSelectionSummary()
     // showGetQuoteModal()
 }
 
@@ -851,874 +643,33 @@ const toggleAccordion = () => {
 };
 
 
-const updateConstructionTab = () => {
-    const construction = document.querySelectorAll('.construction')
+const handleWindowFrameSelection = () => {
+    if(settingsTitle.toLowerCase() === 'window frames'){
+        const frameDesktop = document.querySelectorAll('.tools_sidebar-content .window-frames .window-frame')
+        const frameMobile = document.querySelectorAll('.mobile_tools-bar .window-frames .window-frame')
 
-    construction.forEach(item => {
-        item.innerHTML = `
-        <div class="basic-forms">
-            <h4>Select basic form<h4/>
-            <ul>
-                ${windowFrames.map(frame => (
-            `<li class="basic-form" data-id=${frame.title}>
-                    <span class="selected">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                        </svg>                                  
-                    </span>
-                    <img src=${frame.image} loading="lazy" decoding="sync" alt="" >
-                    <small>${frame.title}</small>
-                </li>`
-        )).join('')}
-            </ul>
-        </div>
-        <div class="num-of-parts single">
-            <h4>Select number of parts (Single)<h4/>
-            <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-        </div>
-
-        ${basicForm === 'overlight' ? (
-                `<div class="num-of-parts overlight">
-            <h4>Select number of parts (overlight)<h4/>
-            <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-        </div>`
-            ) : ''}
-
-        ${basicForm === 'underlight' ? (
-                `<div class="num-of-parts underlight">
-            <h4>Select number of parts (underlight)<h4/>
-            <div class="parts">
-                    <button class="part" data-id='1'>1</button>
-                    <button class="part" data-id='2'>2</button>
-                    <button class="part" data-id='3'>3</button>
-                    <button class="part" data-id='4'>4</button>
-                    <button class="part" data-id='5'>5</button>
-                </div>
-        </div>`
-            ) : ''}
-
-        <div class="ram-types">
-                <h4>Opening style<h4/>
-
-                <ul class="accordion-wrap">
-                    <li class="accordion-content single-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Single</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numOfSingleParts }, (_, i) => i + 1).map((part) => (
-                `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                    `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-            )).join('')}
-            </li>
-
-            ${basicForm === 'overlight' ? (
-                `<li class="accordion-content overlight-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Overlight</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numOfOverLight }, (_, i) => i + 1).map((part) => (
-                    `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                        `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                    )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-                )).join('')}
-            </li>`
-            ) : ''}
-
-            ${basicForm === 'underlight' ? (
-                `<li class="accordion-content underlight-rams">
-                    <div class="accordion-content-header handle-accordion-header">
-                        <p>Underlight</p>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    ${Array.from({ length: numberOfUnderLight }, (_, i) => i + 1).map((part) => (
-                    `<div class="ram-types-box part-${part}">
-                    <p>Frame ${part}</p>
-                    <div class="rams">
-                        ${ramTypes.map(ram => (
-                        `<div class="ram">
-                            <img src=${ram.image} loading="lazy" decoding="sync" alt="" >
-                        </div>`
-                    )).join('')}
-                    </div>
-                    
-                    
-                </div>`
-                )).join('')}
-            </li>`
-            ) : ''}
-            </ul>
-        </div>
-
-                
-        </div>`
-    })
-
-
-
-}
-
-const handleBasicFormSelection = () => {
-
-    if (settingsTitle.toLowerCase() === 'construction') {
-        const formsDesktop = document.querySelectorAll('.tools_sidebar-content .basic-form')
-        const formsMobile = document.querySelectorAll('.mobile_tools-bar .basic-form')
-
-
-
-        formsDesktop[currentSelectedForm].classList.add('active')
-        formsMobile[currentSelectedForm].classList.add('active')
-
-        const formChange = (form, index) => {
-            formsDesktop.forEach(form => form.classList.remove('active'))
-            formsMobile.forEach(form => form.classList.remove('active'))
-            form.classList.add('active')
-            currentSelectedForm = index;
-            basicForm = form.dataset.id.toLowerCase()
-            console.log(basicForm);
-            updateConstructionTab()
-            getCurrentToolsBarContent()
-
-            formsDesktop.forEach((form) => {
-                form.removeEventListener('click', handleFormChangeDesktop)
-            })
-
-            formsMobile.forEach((form) => {
-                form.removeEventListener('click', handleFormChangeMobile)
-            })
-
-        }
-
-        const handleFormChangeDesktop = (e) => {
-            let form = e.target
-
-            while (form && !form.classList.contains('basic-form')) {
-                form = form.parentElement;
-            }
-            if (form) {
-                const index = Array.from(formsDesktop).indexOf(form);
-                formChange(form, index)
-            }
-        }
-
-        const handleFormChangeMobile = (e) => {
-            let form = e.target
-
-            while (form && !form.classList.contains('basic-form')) {
-                form = form.parentElement;
-            }
-            if (form) {
-                const index = Array.from(formsMobile).indexOf(form);
-                formChange(form, index)
-            }
-        }
-
-
-        formsDesktop.forEach((form, index) => {
-            form.addEventListener('click', handleFormChangeDesktop)
-        })
-        formsMobile.forEach((form, index) => {
-            form.addEventListener('click', handleFormChangeMobile)
-        })
-
-
-
-    }
-
-
-}
-
-
-const handleSinglePartSelection = () => {
-
-    if (settingsTitle.toLowerCase() === 'construction') {
-
-        const singlePartDesktop = document.querySelectorAll('.tools_sidebar-content .single .part')
-        const singlePartMobile = document.querySelectorAll('.mobile_tools-bar .single .part')
-
-
-        singlePartDesktop[currentSelectedSinglePart].classList.add('active')
-        singlePartMobile[currentSelectedSinglePart].classList.add('active')
-
-        singlePartDesktop.forEach((part, index) => {
-            part.addEventListener('click', () => {
-                singlePartDesktop.forEach(part => part.classList.remove('active'))
-                part.classList.add('active')
-                const numOfParts = part.dataset.id
-                numOfSingleParts = numOfParts
-                currentSelectedSinglePart = index;
-                updateConstructionTab()
-                getCurrentToolsBarContent()
+        frameDesktop.forEach((frame, index) => {
+            frameDesktop[currentSelectedWindowFrame].classList.add('active')
+            frame.addEventListener('click', () => {
+                frameDesktop.forEach(frame => frame.classList.remove('active'))
+                frameMobile.forEach(frame => frame.classList.remove('active'))
+                frame.classList.add('active')
+                frameMobile[index].classList.add('active')
+                currentSelectedWindowFrame = index
             })
         })
 
-
-
-        const partChange = (part, index) => {
-            singlePartDesktop.forEach(part => part.classList.remove('active'))
-            singlePartMobile.forEach(part => part.classList.remove('active'))
-            part.classList.add('active')
-            const numOfParts = part.dataset.id
-            numOfSingleParts = numOfParts
-            currentSelectedSinglePart = index;
-            updateConstructionTab()
-            getCurrentToolsBarContent()
-
-            singlePartDesktop.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeDesktop)
-            })
-
-            singlePartMobile.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeMobile)
-            })
-
-        }
-
-        const handlePartChangeDesktop = (e) => {
-            let part = e.target
-            const index = Array.from(singlePartDesktop).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        const handlePartChangeMobile = (e) => {
-            let part = e.target
-            const index = Array.from(singlePartMobile).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        singlePartDesktop.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeDesktop)
-        })
-        singlePartMobile.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeMobile)
-        })
-
-    }
-
-}
-
-const handleOverlightPartSelection = () => {
-
-    if (settingsTitle.toLowerCase() === 'construction' && basicForm === 'overlight') {
-
-        const overlightPartDesktop = document.querySelectorAll('.tools_sidebar-content .overlight .part')
-        const overlightPartMobile = document.querySelectorAll('.mobile_tools-bar .overlight .part')
-
-        overlightPartDesktop[currentSelectedOverlightPart].classList.add('active')
-        overlightPartMobile[currentSelectedOverlightPart].classList.add('active')
-
-        overlightPartDesktop.forEach((part, index) => {
-            part.addEventListener('click', () => {
-                overlightPartDesktop.forEach(part => part.classList.remove('active'))
-                part.classList.add('active')
-                const numOfParts = part.dataset.id
-                numOfOverLight = numOfParts
-                currentSelectedOverlightPart = index;
-                updateConstructionTab()
-                getCurrentToolsBarContent()
+        frameMobile.forEach((frame, index) => {
+            frameMobile[currentSelectedWindowFrame].classList.add('active')
+            frame.addEventListener('click', () => {
+                frameMobile.forEach(frame => frame.classList.remove('active'))
+                frameDesktop.forEach(frame => frame.classList.remove('active'))
+                frame.classList.add('active')
+                frameDesktop[index].classList.add('active')
+                currentSelectedWindowFrame = index
             })
         })
 
-
-
-        const partChange = (part, index) => {
-            overlightPartDesktop.forEach(part => part.classList.remove('active'))
-            overlightPartMobile.forEach(part => part.classList.remove('active'))
-            part.classList.add('active')
-            const numOfParts = part.dataset.id
-            numOfOverLight = numOfParts
-            currentSelectedOverlightPart = index;
-            updateConstructionTab()
-            getCurrentToolsBarContent()
-
-            overlightPartDesktop.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeDesktop)
-            })
-
-            overlightPartMobile.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeMobile)
-            })
-
-        }
-
-        const handlePartChangeDesktop = (e) => {
-            let part = e.target
-            const index = Array.from(overlightPartDesktop).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        const handlePartChangeMobile = (e) => {
-            let part = e.target
-            const index = Array.from(overlightPartMobile).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        overlightPartDesktop.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeDesktop)
-        })
-        overlightPartMobile.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeMobile)
-        })
-
-    }
-
-}
-
-
-const handleUnderlightPartSelection = () => {
-
-    if (settingsTitle.toLowerCase() === 'construction' && basicForm === 'underlight') {
-
-        const underlightPartDesktop = document.querySelectorAll('.tools_sidebar-content .underlight .part')
-        const underlightPartMobile = document.querySelectorAll('.mobile_tools-bar .underlight .part')
-
-        underlightPartDesktop[currentSelectedUnderlightPart].classList.add('active')
-        underlightPartMobile[currentSelectedUnderlightPart].classList.add('active')
-
-        underlightPartDesktop.forEach((part, index) => {
-            part.addEventListener('click', () => {
-                underlightPartDesktop.forEach(part => part.classList.remove('active'))
-                part.classList.add('active')
-                const numOfParts = part.dataset.id
-                numberOfUnderLight = numOfParts
-                currentSelectedUnderlightPart = index;
-                updateConstructionTab()
-                getCurrentToolsBarContent()
-            })
-        })
-
-
-
-        const partChange = (part, index) => {
-            underlightPartDesktop.forEach(part => part.classList.remove('active'))
-            underlightPartMobile.forEach(part => part.classList.remove('active'))
-            part.classList.add('active')
-            const numOfParts = part.dataset.id
-            numberOfUnderLight = numOfParts
-            currentSelectedUnderlightPart = index;
-            updateConstructionTab()
-            getCurrentToolsBarContent()
-
-            underlightPartDesktop.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeDesktop)
-            })
-
-            underlightPartMobile.forEach((part) => {
-                part.removeEventListener('click', handlePartChangeMobile)
-            })
-
-        }
-
-        const handlePartChangeDesktop = (e) => {
-            let part = e.target
-            const index = Array.from(underlightPartDesktop).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        const handlePartChangeMobile = (e) => {
-            let part = e.target
-            const index = Array.from(underlightPartMobile).indexOf(part);
-            partChange(part, index)
-        }
-
-
-        underlightPartDesktop.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeDesktop)
-        })
-        underlightPartMobile.forEach((part, index) => {
-            part.addEventListener('click', handlePartChangeMobile)
-        })
-
-    }
-
-}
-
-
-const handleSingleFrameOpening = () => {
-    // Handle frame 1 selection
-    if (settingsTitle.toLowerCase() === 'construction') {
-
-        const handleFrame1RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .single-rams .part-1 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .single-rams .part-1 .ram')
-
-
-            // set rams for frame 1
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachSingleFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame1Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachSingleFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame1Ram = index
-                })
-            })
-
-        }
-
-        const handleFrame2RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .single-rams .part-2 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .single-rams .part-2 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachSingleFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame2Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachSingleFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame2Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame3RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .single-rams .part-3 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .single-rams .part-3 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachSingleFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachSingleFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame4RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .single-rams .part-4 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .single-rams .part-4 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachSingleFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachSingleFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame5RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .single-rams .part-5 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .single-rams .part-5 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachSingleFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame5Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachSingleFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachSingleFrame.frame5Ram = index
-                })
-            })
-
-
-        }
-
-
-        handleFrame1RamSelect()
-        handleFrame2RamSelect()
-        handleFrame3RamSelect()
-        handleFrame4RamSelect()
-        handleFrame5RamSelect()
-    }
-}
-
-
-
-const handleOverlightFrameOpening = () => {
-    // Handle frame 1 selection
-    if (settingsTitle.toLowerCase() === 'construction') {
-
-        const handleFrame1RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .overlight-rams .part-1 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .overlight-rams .part-1 .ram')
-
-            // set rams for frame 1
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachOverlightFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame1Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachOverlightFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame1Ram = index
-                })
-            })
-
-        }
-
-        const handleFrame2RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .overlight-rams .part-2 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .overlight-rams .part-2 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachOverlightFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame2Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachOverlightFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame2Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame3RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .overlight-rams .part-3 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .overlight-rams .part-3 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachOverlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachOverlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame4RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .overlight-rams .part-4 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .overlight-rams .part-4 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachOverlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachOverlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame5RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .overlight-rams .part-5 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .overlight-rams .part-5 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachOverlightFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame5Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachOverlightFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsTypesForEachOverlightFrame.frame5Ram = index
-                })
-            })
-
-
-        }
-
-
-        handleFrame1RamSelect()
-        handleFrame2RamSelect()
-        handleFrame3RamSelect()
-        handleFrame4RamSelect()
-        handleFrame5RamSelect()
-    }
-}
-
-
-const handleUnderlightFrameOpening = () => {
-    // Handle frame 1 selection
-    if (settingsTitle.toLowerCase() === 'construction') {
-
-        const handleFrame1RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .underlight-rams .part-1 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .underlight-rams .part-1 .ram')
-
-
-            // set rams for frame 1
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachUnderlightFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsMobile[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame1Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachUnderlightFrame.frame1Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsDesktop[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame1Ram = index
-                })
-            })
-
-        }
-
-        const handleFrame2RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .underlight-rams .part-2 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .underlight-rams .part-2 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachUnderlightFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsMobile[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame2Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachUnderlightFrame.frame2Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsDesktop[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame2Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame3RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .underlight-rams .part-3 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .underlight-rams .part-3 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsMobile[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsDesktop[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame4RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .underlight-rams .part-4 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .underlight-rams .part-4 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsMobile[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame3Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachUnderlightFrame.frame3Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsDesktop[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame3Ram = index
-                })
-            })
-
-
-        }
-
-        const handleFrame5RamSelect = () => {
-            const ramsDesktop = document.querySelectorAll('.tools_sidebar-content .underlight-rams .part-5 .ram')
-            const ramsMobile = document.querySelectorAll('.mobile_tools-bar .underlight-rams .part-5 .ram')
-
-
-            ramsDesktop.forEach((ram, index) => {
-                ramsDesktop[ramsTypesForEachUnderlightFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsMobile[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame5Ram = index
-                })
-            })
-            ramsMobile.forEach((ram, index) => {
-                ramsMobile[ramsTypesForEachUnderlightFrame.frame5Ram].classList.add('active')
-                ram.addEventListener('click', () => {
-                    ramsMobile.forEach(ram => ram.classList.remove('active'))
-                    ramsDesktop.forEach(ram => ram.classList.remove('active'))
-                    ram.classList.add('active')
-                    ramsDesktop[index].classList.add('active')
-                    ramsTypesForEachUnderlightFrame.frame5Ram = index
-                })
-            })
-
-
-        }
-
-
-        handleFrame1RamSelect()
-        handleFrame2RamSelect()
-        handleFrame3RamSelect()
-        handleFrame4RamSelect()
-        handleFrame5RamSelect()
     }
 }
 
@@ -1886,7 +837,6 @@ const handleColorTabs = () => {
             if (currentColorTab === 0) {
                 const colorButtonsDesktop = document.querySelectorAll('.tools_sidebar .window-colors .color')
                 const colorButtonsMobile = document.querySelectorAll('.mobile_tools-bar .window-colors .color')
-                console.log(colorButtonsDesktop);
                 if (colorButtonsDesktop) {
                     colorButtonsDesktop[selectedColor.window].classList.add('active')
 
@@ -1974,33 +924,183 @@ const handleColorTabs = () => {
 
 
 const handleKeyHandleSelections = () => {
-    if(settingsTitle.toLowerCase() === 'handles'){
+    if (settingsTitle.toLowerCase() === 'handles') {
 
-            const handleButtonsDesktop = document.querySelectorAll('.tools_sidebar .handles .handle')
-            const handleButtonsMobile = document.querySelectorAll('.mobile_tools-bar .handles .handle')
+        const handleButtonsDesktop = document.querySelectorAll('.tools_sidebar .handles .handle')
+        const handleButtonsMobile = document.querySelectorAll('.mobile_tools-bar .handles .handle')
 
-            handleButtonsDesktop.forEach((handle, index) => {
-                handleButtonsDesktop[currentSelectedHanlde].classList.add('active')
-                handle.addEventListener('click', () => {
-                    handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
-                    handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
-                    handle.classList.add('active')
-                    handleButtonsMobile[index].classList.add('active')
-                    currentSelectedHanlde = index
+        handleButtonsDesktop.forEach((handle, index) => {
+            handleButtonsDesktop[currentSelectedHandle].classList.add('active')
+            handle.addEventListener('click', () => {
+                handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
+                handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
+                handle.classList.add('active')
+                handleButtonsMobile[index].classList.add('active')
+                currentSelectedHandle = index
+            })
+        })
+
+
+        handleButtonsMobile.forEach((handle, index) => {
+            handleButtonsMobile[currentSelectedHandle].classList.add('active')
+            handle.addEventListener('click', () => {
+                handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
+                handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
+                handle.classList.add('active')
+                handleButtonsDesktop[index].classList.add('active')
+                currentSelectedHandle = index
+            })
+        })
+
+    }
+}
+
+
+
+const handleGlassSelection = () => {
+    if (settingsTitle.toLowerCase() === 'glass') {
+        // handle glass types
+        // handle glazing
+
+        const handleGlassType = () => {
+            const glassButtonDesktop = document.querySelectorAll('.tools_sidebar .glass-types .glass-type')
+            const glassButtonMobile = document.querySelectorAll('.mobile_tools-bar .glass-types .glass-type')
+
+            glassButtonDesktop.forEach((glassType, index) => {
+                glassButtonDesktop[currentSelectedGlassType].classList.add('active')
+                glassType.addEventListener('click', () => {
+                    glassButtonDesktop.forEach(glassType => glassType.classList.remove('active'))
+                    glassButtonMobile.forEach(glassType => glassType.classList.remove('active'))
+                    glassType.classList.add('active')
+                    glassButtonMobile[index].classList.add('active')
+                    currentSelectedGlassType = index
                 })
             })
 
-
-            handleButtonsMobile.forEach((handle, index) => {
-                handleButtonsMobile[currentSelectedHanlde].classList.add('active')
-                handle.addEventListener('click', () => {
-                    handleButtonsMobile.forEach(handle => handle.classList.remove('active'))
-                    handleButtonsDesktop.forEach(handle => handle.classList.remove('active'))
-                    handle.classList.add('active')
-                    handleButtonsDesktop[index].classList.add('active')
-                    currentSelectedHanlde = index
+            glassButtonMobile.forEach((glassType, index) => {
+                glassButtonMobile[currentSelectedGlassType].classList.add('active')
+                glassType.addEventListener('click', () => {
+                    glassButtonMobile.forEach(glassType => glassType.classList.remove('active'))
+                    glassButtonDesktop.forEach(glassType => glassType.classList.remove('active'))
+                    glassType.classList.add('active')
+                    glassButtonDesktop[index].classList.add('active')
+                    currentSelectedGlassType = index
                 })
             })
 
+        }
+
+        const handleGlazing = () => {
+            const glazButtonDesktop = document.querySelectorAll('.tools_sidebar .glazings .glazing')
+            const glazButtonMobile = document.querySelectorAll('.mobile_tools-bar .glazings .glazing')
+
+
+            glazButtonDesktop.forEach((glaz, index) => {
+                glazButtonDesktop[currentSelectedGlazing].classList.add('active')
+                glaz.addEventListener('click', () => {
+                    glazButtonDesktop.forEach(glaz => glaz.classList.remove('active'))
+                    glazButtonMobile.forEach(glaz => glaz.classList.remove('active'))
+                    glaz.classList.add('active')
+                    glazButtonMobile[index].classList.add('active')
+                    currentSelectedGlazing = index
+                })
+            })
+
+            glazButtonMobile.forEach((glaz, index) => {
+                glazButtonMobile[currentSelectedGlazing].classList.add('active')
+                glaz.addEventListener('click', () => {
+                    glazButtonMobile.forEach(glaz => glaz.classList.remove('active'))
+                    glazButtonDesktop.forEach(glaz => glaz.classList.remove('active'))
+                    glaz.classList.add('active')
+                    glazButtonDesktop[index].classList.add('active')
+                    currentSelectedGlazing = index
+                })
+            })
+
+        }
+
+        handleGlassType()
+        handleGlazing()
+    }
+}
+
+const handleSelectionSummary = () => {
+    if(settingsTitle.toLowerCase() === 'done'){
+        const doneTab = document.querySelectorAll('.summary_wrapper')
+
+
+        doneTab.forEach(item => {
+            return item.innerHTML = `<div class="download_pdf">
+                            <p>Get a summary of all your selections on a PDF with images included.</p>
+                            <button class="btn btn-outline">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                    </svg>
+                                </span>
+                                <p>Download PDF</p>
+                            </button>
+                        </div>
+                        <div class="data-container">
+                                <div class="section-data">
+                                <h5 class="section-name">Your configuration</h5>
+                                <div class="section-details">
+                                    <div class="row section-detail">
+                                        <p class="col-a">Profile</p>
+                                        <p class="col-b">${profiles[currentSelectedProfile].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Window type</p>
+                                        <p class="col-b">${windowFrames[currentSelectedWindowFrame].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Handle</p>
+                                        <p class="col-b">${handles[currentSelectedHandle].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Dimension</p>
+                                        <p class="col-b">1000 x 2000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="section-data">
+                                <h5 class="section-name">Colors</h5>
+                                <div class="section-details">
+                                    <div class="row section-detail">
+                                        <p class="col-a">Window</p>
+                                        <p class="col-b"><span class="color_indicator" style="background: ${colors[selectedColor.window].code}"></span>${colors[selectedColor.window].Ralcode}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Frame</p>
+                                        <p class="col-b"><span class="color_indicator" style="background: ${colors[selectedColor.frame].code}"></span>${colors[selectedColor.frame].Ralcode}</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="section-data">
+                                <h5 class="section-name">Glass</h5>
+                                <div class="section-details">
+                                    <div class="row section-detail">
+                                        <p class="col-a">Glass type</p>
+                                        <p class="col-b">${glassTypes[currentSelectedGlassType].title}</p>
+                                    </div>
+                                    <div class="row section-detail">
+                                        <p class="col-a">Glazing</p>
+                                        <p class="col-b">${glazing[currentSelectedGlazing].title}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-buttons">
+                                <button class="summary-get-quote">Get a quote</button>
+                                <button class="summary-add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                        
+                  </div>`
+        })
     }
 }
