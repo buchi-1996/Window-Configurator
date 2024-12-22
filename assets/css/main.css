@@ -3,6 +3,7 @@
 @import url('./utitlities.css');
 @import url('./form.css');
 @import url('../css/pages/window-configurator.css');
+@import url('../css/pages/front-pages.css');
 
 html{
     scroll-behavior: smooth;

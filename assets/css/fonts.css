@@ -4,10 +4,63 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-Regular.ttf) format('truetype');
+    font-weight: 400; /* Regular weight */
+    font-style: normal; /* Normal style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-Bold.ttf) format('truetype');
+    font-weight: 700; /* Bold weight */
+    font-style: normal; /* Normal style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-Light.ttf) format('truetype');
+    font-weight: 300; /* Light weight */
+    font-style: normal; /* Normal style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-LightItalic.ttf) format('truetype');
+    font-weight: 300; /* Light weight */
+    font-style: italic; /* Italic style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-BoldItalic.ttf) format('truetype');
+    font-weight: 700; /* Bold weight */
+    font-style: italic; /* Italic style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-Medium.ttf) format('truetype');
+    font-weight: 500; /* Medium weight */
+    font-style: normal; /* Normal style */
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(../fonts/CormorantGaramond-MediumItalic.ttf) format('truetype');
+    font-weight: 500; /* Medium weight */
+    font-style: italic; /* Italic style */
+}
+
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
+    font-family: "Cormorant Garamond", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased; /* WebKit-based browsers */
+
 }
 
 h1 {
@@ -31,7 +84,7 @@ h5 {
 }
 
 small{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Raleway', sans-serif;
     margin-top: 2px;
     font-size: 12px;
 }
@@ -39,14 +92,14 @@ small{
 p, a, button, label, li {
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.4;
-    font-family: 'Inter', sans-serif;
+    line-height: 1.8;
+    font-family: 'Raleway', sans-serif;
 }
 
 
 
 input, span, select, option{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 
