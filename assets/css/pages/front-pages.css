@@ -1245,9 +1245,18 @@ footer .call-to-action {
     text-align: left;
   }
 
+  .intro{
+    padding: 50px 0;
+
+  }
+
   .intro .intro-details {
     grid-template-columns: 1fr;
     gap: 50px;
+  }
+
+  .intro-details h1{
+    font-size: 3rem;
   }
 
   /* products */
@@ -1263,11 +1272,24 @@ footer .call-to-action {
 
   /*About  */
 
+  .about{
+    padding: 50px 0;
+  }
+
   .about .about-content-wrapper {
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
   }
+
+  .product-card-details h4 {
+    font-size: 1.6rem;
+}
+
+  .product-card-details-wrapper {
+    padding: 10px;
+    border-radius: 10px;
+}
 
   .about-content-wrapper img {
     width: 100%;
@@ -1293,6 +1315,10 @@ footer .call-to-action {
     width: 100px;
   }
   /* configurator */
+
+  .configurator{
+    padding: 50px 0;
+  }
 
   .configurator-wrapper {
     padding: 50px 24px 10px;
@@ -1331,6 +1357,11 @@ footer .call-to-action {
   }
 
   /* projects */
+
+  .projects{
+    padding: 50px 0;
+  }
+
   .projects-wrapper {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -1434,4 +1465,15 @@ footer .call-to-action {
     
 }
 
+}
+
+
+@media(max-width: 468px){
+    .projects-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .call-to-action h4{
+        font-size: 1.8rem;
+      }
 }
